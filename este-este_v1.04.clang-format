@@ -2,8 +2,8 @@
 #` clang-format file for the "A-Code-Formatting-Style" (ACFS) guidelines.  See https://github.com/este-este/A-Code-Formatting-Style
 #
 # *******************************************************************************
-# Date:      2025-02-28
-# Filename:  este-este_v1.03.clang-format
+# Date:      2025-03-28
+# Filename:  este-este_v1.04.clang-format
 # Author:    este este (https://github.com/este-este)
 #
 #   Note:  You must rename this file to ".clang-format" to have it be recognized by the clang-format executable.
@@ -72,7 +72,8 @@
 #     - Turn on Word Wrap because there are some long lines in this file.
 #     - Features of this UDL file:
 #         - The "#" character in column 1 colorizes the line green.  Also begins an Inner Fold (see below).
-#         - The "#" character in column 2 or higher colorizes the line black and allows recognition of UDL keywords that are colorized red.  Also ends an Inner Fold (see below).
+#         - The "#" character in column 2 or higher colorizes the line black and allows recognition of UDL keywords that are colorized red.  
+#           Also ends an Inner Fold (see below).
 #             - A list of UDL keywords and their usage is at the end of this file.
 #         - Nested folding
 #             - Outer Fold:   FROM START line begins with "#`" TO END line begins with "#>>>>>"
@@ -106,7 +107,8 @@
 #   Turn off clang-format in code:  // clang-format off
 #   Turn on clang-format in code:   // clang-format on
 #
-#   Use a ".clang-format-ignore" file to make clang-format completely ignore certain files (See https://clang.llvm.org/docs/ClangFormat.html#:~:text=.-,clang%2Dformat%2Dignore,-%C2%B6)
+#   Use a ".clang-format-ignore" file to make clang-format completely ignore certain files 
+#   (See https://clang.llvm.org/docs/ClangFormat.html#:~:text=.-,clang%2Dformat%2Dignore,-%C2%B6)
 #
 #   Integration of the .clang-format file:
 #     - Into Visual Studio, see https://learn.microsoft.com/en-us/visualstudio/ide/reference/options-text-editor-c-cpp-formatting?view=vs-2022 
@@ -154,6 +156,14 @@
 #
 #     InsertBraces:       Adds wrapping braces to support a style that all control statements have a brace delimited code block (even if there is a single statement in code block).  
 #
+# Change Log:
+#   - v1.03
+#       - Initial release
+#   - v1.04
+#       - Changed AlignConsecutiveAssignments > AcrossComments = false
+#           to better control how many lines the AlignConsecutiveAssignments option can affect.
+#       - Changed AlignConsecutiveDeclarations > AcrossComments = false
+#           to better control how many lines the AlignConsecutiveDeclarations option can affect.
 #
 # TODO:
 #
@@ -496,10 +506,12 @@ AlignArrayOfStructures: None
  # !_NOTE_! AlignConsecutiveAssignments: Enabled: true will align 
 #             the variable name and the assignment operator by adding spaces before each such name and operator.
 #           With AcrossEmptyLines: true and AcrossComments: true, this formatting can span many lines.
+ # !!!!! !_NOTE_! AcrossComments: false is important to control the far reaching alignment that AcrossEmptyLines: true provides.
+ #                Specifically, you can benefit from AcrossEmptyLines: true but stop the auto alignment by introducing an empty line comment.
 AlignConsecutiveAssignments:
   Enabled: true
   AcrossEmptyLines: true
-  AcrossComments: true
+  AcrossComments: false
   
   AlignCompound: true
   PadOperators: true
@@ -756,10 +768,12 @@ AlignConsecutiveBitFields: false
 # bbb >>= 2;
 # ---------------------------------------
 #>>>>>
+ # !!!!! !_NOTE_! AcrossComments: false is important to control the far reaching alignment that AcrossEmptyLines: true provides.
+ #                Specifically, you can benefit from AcrossEmptyLines: true but stop the auto alignment by introducing an empty line comment.
 AlignConsecutiveDeclarations:
   Enabled: true
   AcrossEmptyLines: true
-  AcrossComments: true
+  AcrossComments: false
   
  # AlignFunctionDeclarations: true
   AlignFunctionPointers: true
@@ -6119,7 +6133,7 @@ TableGenBreakInsideDAGArg: DontBreak
 #` Keep the following items which are used with the Notepad++ User Defined Language (UDL v2.0 format) file
 # !!!!! five bang marks in this Notepad++ UDL (User Defined Language) means stop the comment and begin formatting UDL keywords.
 # !!!!!---Bookmark---  
-# !!!!! !_NOTE_! 
+ # !!!!! !_NOTE_! 
 #    !!!!!<<<---IMPORTANT--->>>
 #    !!!!!***NOT USED***  deprecated - See XXXX
 #    !!!!!***NOT USED***  This is actually incorrect.         Note:  After the incorrect option description is the corrected version.
